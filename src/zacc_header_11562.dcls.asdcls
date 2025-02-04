@@ -1,0 +1,11 @@
+@EndUserText.label: 'acess control for header proj'
+@MappingRole: true
+define role ZACC_HEADER_11562 {
+//    grant
+//        select
+//            on
+//                ZTMC_HEADER_11562
+//                    where
+//                        inheriting conditions from entity ZTMI_HEADER_11562;
+                        
+}

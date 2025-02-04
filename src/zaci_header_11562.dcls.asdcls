@@ -1,0 +1,11 @@
+@EndUserText.label: 'acess control for header'
+@MappingRole: true
+define role ZACI_HEADER_11562 {
+//    grant 
+//        select
+//            on
+//                ZTMI_HEADER_11562
+//                    where
+//                        (CompanyCode) = aspect pfcg_auth(ZAO_COMPCD,ZAF_COMPCD, ACTVT = '01');
+                        
+}

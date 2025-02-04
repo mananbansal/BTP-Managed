@@ -1,0 +1,60 @@
+managed implementation in class zbp_tmi_supplier unique;
+strict ( 2 );
+
+define behavior for ZTMI_SUPPLIER alias suppl
+persistent table ztm_supplier
+lock master
+authorization master ( instance )
+etag master LocalLastChanged
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) SupplierId,ChangedAt,CreatedAt,CreatedBy;
+  field ( mandatory ) ContactEmail,SupplierName,PhoneNumber,SupplierAddress;
+  mapping for ztm_supplier
+  {
+  SupplierId        =   supplier_id;
+  ContactEmail      =   contact_email;
+  SupplierName      =   supplier_name;
+  PhoneNumber       =   phone_number;
+  SupplierAddress   =   supplier_address;
+  City              =   city;
+  Country           =   country;
+  ChangedAt         =   changed_at;
+  CreatedAt         =   created_at;
+  CreatedBy         =   created_by;
+  LocalLastChanged  =   local_last_changed;
+
+  }
+
+  association _products { create; }
+}
+
+define behavior for ZTMI_PRODUCTS alias prod
+persistent table ztm_products
+lock dependent by _supplier
+authorization dependent by _supplier
+etag master LocalLastChanged
+{
+  update;
+  delete;
+  field ( readonly ) SupplierId, ProductId, CategoryId;
+  field ( mandatory ) ProductName;
+  mapping for ztm_products
+  {
+  SupplierId        =   supplier_id;
+  ProductId         =   product_id;
+  CategoryId        =   category_id;
+  ProductName       =   product_name;
+  Currency          =   currency;
+  Rate              =   rate;
+  TaxAmaount        =   tax_amaount;
+  StockQuantity     =   stock_quantity;
+  ChangedAt         =   changed_at;
+  CreatedAt         =   created_at;
+  CreatedBy         =   created_by;
+  LocalLastChanged  =   local_last_changed;
+  }
+  association _supplier;
+}

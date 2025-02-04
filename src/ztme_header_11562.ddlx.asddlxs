@@ -1,0 +1,87 @@
+@Metadata.layer: #CORE
+@UI:{
+    headerInfo :{
+        typeName: 'Header',
+        typeNamePlural: 'Headers',
+        title:{
+            type: #STANDARD,
+            label: 'Header',
+            value: 'Docno' // Has to be same as use in cds
+        }
+    }
+}
+@Search.searchable: true
+annotate view ZTMC_HEADER_11562
+    with 
+{
+    @UI.facet: [{
+    id : 'Header',
+    purpose: #STANDARD,
+    type: #IDENTIFICATION_REFERENCE,
+    label: 'Header Info',
+    position: 10
+},
+{
+    id : 'Item',
+    type : #LINEITEM_REFERENCE,
+    label : 'Item Info',
+    position : 20,
+    targetElement: '_item'
+},
+{
+    id : 'Address',
+    type : #LINEITEM_REFERENCE,
+    label : 'Address Info',
+    position: 30,
+    targetElement: '_add'
+}]
+    @UI.identification: [{ position: 10 , importance: #HIGH , label : 'Document Number' }]
+    @UI :{ lineItem: [{ position: 10 , importance: #HIGH }, {type: #FOR_ACTION, dataAction: 'changeStatus', label: 'Change Status'}]}
+    @UI:{ selectionField: [{ position : 10 }]}
+    @Search.defaultSearchElement: true
+    @Search.fuzzinessThreshold: 0.8
+    Docno;  // case sensetive ---> same as in projection
+    
+    @UI.identification: [{ position: 20 , importance: #HIGH , label : 'Status' }]
+    @UI :{lineItem: [{ position: 20 , importance: #HIGH }]}
+    @UI:{ selectionField: [{ position : 20 }]}
+    @Search.defaultSearchElement: true
+    @Search.fuzzinessThreshold: 0.8
+    Status;
+    
+    @UI.identification: [{ position: 30 , importance: #HIGH , label : 'Company Code' }]
+    @UI :{lineItem: [{ position: 30 ,importance: #HIGH }]}
+    @UI:{ selectionField: [{ position : 30 }]}
+    CompanyCode;
+    
+    @UI.identification: [{ position: 40 , importance: #HIGH , label : 'Purchase Organization' }]
+    @UI :{lineItem: [{ position: 40 ,importance: #HIGH }]}
+    @UI:{ selectionField: [{ position : 40 }]}
+    PurchaseOrg;
+    
+    @UI.identification: [{ position: 50 , importance: #HIGH , label : 'Currency' }]
+    @UI :{lineItem: [{ position: 50 ,importance: #HIGH }]}
+    @UI:{ selectionField: [{ position : 50 }]}
+    Currency;
+    
+    @UI.identification: [{ position: 60 , importance: #HIGH , label : 'Suplier Number' }]
+    @UI :{lineItem: [{ position: 60 ,importance: #HIGH }]}
+    @UI:{ selectionField: [{ position : 60 }]}
+    SupplierNo;
+    
+    @UI.identification: [{ position: 70 , importance: #HIGH , label : 'Changed At' }]
+    @UI :{lineItem: [{ position: 70 ,importance: #HIGH }]}
+    @UI:{selectionField: [{ position : 70 }]}
+    ChangedAt;
+    
+    @UI.identification: [{ position: 80 , importance: #HIGH , label : 'Created At' }]
+    @UI :{lineItem: [{ position: 80 ,importance: #HIGH }]}
+    @UI:{selectionField: [{ position : 80 }]}
+    CreatedAt;
+    
+    @UI.identification: [{ position: 90 , importance: #HIGH , label : 'Created By' }]
+    @UI :{lineItem: [{ position: 90 ,importance: #HIGH }]}
+    @UI:{selectionField: [{ position : 90 }]}
+    CreatedBy;  
+    
+}

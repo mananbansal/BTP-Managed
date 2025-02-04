@@ -1,0 +1,84 @@
+managed;
+//strict ( 2 );
+
+define behavior for ZTMI_HEADER_11562 //alias <alias_name>
+implementation in class zbp_tmi_header_11562 unique
+persistent table ztm_header_11562
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+ // field ( readonly) Docno;
+  field ( mandatory ) SupplierNo, CompanyCode, PurchaseOrg;
+  mapping for ztm_header_11562
+  { Docno = docno;
+  CompanyCode = company_code;
+  Currency = currency;
+  SupplierNo = supplier_no;
+  Status = status;
+  PurchaseOrg = purchase_org;
+  ChangedAt = changed_at;
+  CreatedAt = created_at;
+  CreatedBy = created_by;
+  }
+  association _add { create; }
+  association _item { create; }
+  action changeStatus result [1] $self;
+  validation validateCurrency on save { field Currency;create;update;}
+}
+
+define behavior for ZTMI_ADD_11562 //alias <alias_name>
+implementation in class zbp_tmi_add_11562 unique
+persistent table ztm_add_11562
+lock dependent by _header
+authorization dependent by _header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Docno;
+  mapping for ztm_add_11562
+  { Docno = docno;
+  AddNo = add_no;
+  Name = name;
+  StAdd = st_add;
+  City = city;
+  country = country;
+  ContNo = cont_no;
+  }
+  association _header;
+   validation validateCountry on save { field Country;create;update;}
+}
+
+define behavior for ZTMI_ITEM_11562 //alias <alias_name>
+implementation in class zbp_tmi_item_11562 unique
+persistent table ztm_item_11562
+lock dependent by _header
+authorization dependent by _header
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( readonly ) Docno;
+  field ( mandatory ) ItemNo, Quantity, Amount;
+  mapping for ztm_item_11562
+  { Docno = docno;
+  Status = status;
+  Currency = currency;
+  ItemNo = item_no;
+  Quantity = quantity;
+  Amount = amount;
+  TaxAmt = tax_amt;
+  ChangedAt = changed_at;
+  CreatedAt = created_at;
+  CreatedBy = created_by;
+  }
+  association _header;
+  //action changeItmStatus result [1] $self;
+  validation validateCurrency on save { field Currency;create;update;}
+  determination calculateTax on modify {field Amount; }
+
+}

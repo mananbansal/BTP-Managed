@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_TM_EMP_11562'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_TM_EMP_11562'
+  }
+}
+define service ZUI_TM_EMP_11562_O4 provider contracts odata_v4_ui {
+  expose ZC_TM_EMP_11562;
+}
