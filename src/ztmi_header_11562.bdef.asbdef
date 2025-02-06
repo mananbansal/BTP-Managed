@@ -1,9 +1,10 @@
 managed;
 //strict ( 2 );
 
-define behavior for ZTMI_HEADER_11562 //alias <alias_name>
+define behavior for ZTMI_HEADER_11562
 implementation in class zbp_tmi_header_11562 unique
 persistent table ztm_header_11562
+with additional save
 lock master
 authorization master ( instance )
 //etag master <field_name>

@@ -1,0 +1,4 @@
+@EndUserText.label: 'service definition for change document'
+define service ZSD_READ_CD_HEADER {
+  expose ZTMI_READ_CD_HEADER;
+}
